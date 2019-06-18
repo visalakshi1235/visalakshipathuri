@@ -20,7 +20,7 @@ public class NumberToWordValidator {
 	{
 		String nuberStr=number+"";
 		boolean result= nuberStr.matches("[A-Za-z0-9]+");
-		if(result)
+		if(!result)
 		{
 			throw new NumberToWordException(constant.alphaNumericMsg);
 		}

@@ -8,30 +8,85 @@ import com.number.word.util.NumberToWordUtil;
 public class NumberToWordConverter {
 	NumberToWordUtil util=new NumberToWordUtil();
 	NumberToWordConstant constant =new NumberToWordConstant();
+	public enum TenNames {
+		Space(""),
+		TEN(" ten"),
+		Twenty(" twenty"),
+		Thirty(" thirty"),
+		Forty(" forty"),
+		Fifty(" fifty"),
+		Sixty(" sixty"),
+		Seventy(" seventy"),
+		Eighty(" eighty"),
+		Ninety(" ninety");
+	private final String value;
+	TenNames(final String value)
+	{
+		this.value=value;
+	}
+	public String getValue()
+	{
+		return value;
+	}
+ }
 	
-	
+	public enum NumNames {
+		Space(" "),
+		One(" one"),
+		Two(" two"),
+		Three(" three"),
+		Four(" four"),
+		Five(" five"),
+		Six(" six"),
+		Seven(" seven"),
+		Eight(" eight"),
+		Nine(" nine"),
+		Ten(" ten"),
+		Eleven(" eleven"),
+		Twelve(" twelve"),
+		Thirteen(" thirteen"),
+		Fourteen(" fourteen"),
+		Fifteen(" fifteen"),
+		Sixteen(" sixteen"),
+		Seventeen(" seventeen"),
+		Eighteen(" eighteen"),
+		Nineteen("nineteen");
+	private final String value;
+	private NumNames(final String value)
+	{
+		this.value=value;
+	}
+	public String getValue()
+	{
+		return value;
+	}
+		
+}
 	private String converterLessThanThousand(int number) {
 		
 		String soFar;
+		TenNames[] tenNamesList=TenNames.values();
+		NumNames[] numNamesList=NumNames.values();
 		
 		if (number % 100 < 20 ) {
-			soFar = constant.numNames[number % 100];
+			soFar = numNamesList[number % 100].value;
 			number /= 100;
 		}
 		
 		else {
 			
-			soFar = constant.numNames[number % 10];
+			soFar =numNamesList[number % 10].value;
 			number /= 10;
 			
-			soFar = constant.tenNames[number % 10]+soFar;
+			
+			soFar = tenNamesList[number % 10].value+soFar;
 			number /= 10;
 			
 		}
 		
 		if (number ==0) return soFar;
 		
-		return constant.tenNames[number] + constant.hundred + soFar;
+		return tenNamesList[number].value + constant.hundred + soFar;
 		
 	}
 	
